@@ -1,0 +1,37 @@
+language ESSENCE' 1.0
+
+letting DOMAIN1 be domain int(1..9)
+letting MAXRANGE be domain int(1..45)
+
+
+given known_count, cells, rows : int
+given known_list : matrix indexed by [ int (1..known_count) ] of DOMAIN1
+given number_pos : matrix indexed by [ int (1..known_count) ] of MAXRANGE
+$//Currently not used =>
+given row_list : matrix indexed by [ DOMAIN1 ] of MAXRANGE 
+
+$// no if-else, this is my solution.
+given current_row : matrix indexed by [ MAXRANGE ] of int(0..8)
+
+find jj : matrix indexed by [int (1..10)] of DOMAIN1
+
+	
+
+	such that
+
+		forAll i : int(1..known_count).
+			jj[number_pos[i]] = known_list[i],
+		
+		forAll j : int(1..(cells - rows)). (
+			$// Thankfully ESSENSE' is a high-level language so this is human-readable.
+			jj[current_row[j]+j+1] + jj[current_row[j]+j+2] = jj[j]\/ 
+			jj[current_row[j]+j+1] - jj[current_row[j]+j+2] = jj[j] \/ 
+				jj[current_row[j]+j+2] - jj[current_row[j]+j+1] = jj[j] \/
+			jj[current_row[j]+j+1] * jj[j] = jj[current_row[j]+j+2] \/ 
+				jj[current_row[j]+j+2] * jj[j] = jj[current_row[j]+j+1] \/
+			jj[current_row[j]+j+1] * jj[current_row[j]+j+2] = jj[j]
+		),
+
+		$// this is still static... need to work out how to get submatrixes
+		alldifferent([jj[7], jj[8], jj[9], jj[10]])
+

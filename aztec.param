@@ -1,0 +1,40 @@
+language ESSENCE' 1.0
+
+$// Where each row ends - static
+letting row_list be [1, 2, 4, 7, 11, 16, 22, 29, 37]
+$// where they end  [1, 3, 6, 10, 15, 21, 28, 36, 45]
+
+
+$// How many known numbers are there?
+letting known_count = 4
+
+$// What are the know numbers?
+letting known_list be [8, 8, 8, 2]
+
+$// Where do you want to place your know numbers?
+$// Positions are shown bellow.
+$//	   	  [1]		
+$//	   	 [2][3]		
+$//     [4][5][6]	
+$//   [7][8][9][10]	etc...
+letting number_pos be [1, 5, 7, 10]
+
+
+$// How many cells will the pyramid have?
+$// 	10 cells:	|	6 cells:
+$//	      []		|		[]
+$//	  	 [][]		|	   [][]
+$//     [][][]		|	  [][][]
+$//    [][][][]		|
+letting cells = 10
+$// this is lazy but it might be improved later
+letting rows = 4 
+letting current_row be [0,
+						1, 1,
+						2, 2, 2,
+						3, 3, 3, 3,
+						4, 4, 4, 4, 4,
+						5, 5, 5, 5, 5, 5,
+						6, 6, 6, 6, 6, 6, 6,
+						7, 7, 7, 7, 7, 7, 7, 7,
+						8, 8, 8, 8, 8, 8, 8, 8, 8]
