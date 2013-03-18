@@ -33,5 +33,7 @@ find jj : matrix indexed by [int (1..10)] of DOMAIN1
 		),
 
 		$// this is still static... need to work out how to get submatrixes
+		alldifferent([jj[1]]),
+		alldifferent([jj[2], jj[3]]),
+		alldifferent([jj[4], jj[5], jj[6]]),
 		alldifferent([jj[7], jj[8], jj[9], jj[10]])
-
