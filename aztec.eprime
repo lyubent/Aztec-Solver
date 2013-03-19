@@ -7,33 +7,32 @@ letting MAXRANGE be domain int(1..45)
 given known_count, cells, rows : int
 given known_list : matrix indexed by [ int (1..known_count) ] of DOMAIN1
 given number_pos : matrix indexed by [ int (1..known_count) ] of MAXRANGE
-$//Currently not used =>
-given row_list : matrix indexed by [ DOMAIN1 ] of MAXRANGE 
-
-$// no if-else, this is my solution.
 given current_row : matrix indexed by [ MAXRANGE ] of int(0..8)
 
-find jj : matrix indexed by [int (1..10)] of DOMAIN1
+find jj : matrix indexed by [int (1..cells)] of DOMAIN1
 
-	
+such that
 
-	such that
-
-		forAll i : int(1..known_count).
-			jj[number_pos[i]] = known_list[i],
+	forAll i : int(1..known_count). 
+		jj[number_pos[i]] = known_list[i],
 		
-		forAll j : int(1..(cells - rows)). (
-			$// Thankfully ESSENSE' is a high-level language so this is human-readable.
-			jj[current_row[j]+j+1] + jj[current_row[j]+j+2] = jj[j]\/ 
-			jj[current_row[j]+j+1] - jj[current_row[j]+j+2] = jj[j] \/ 
-				jj[current_row[j]+j+2] - jj[current_row[j]+j+1] = jj[j] \/
-			jj[current_row[j]+j+1] * jj[j] = jj[current_row[j]+j+2] \/ 
-				jj[current_row[j]+j+2] * jj[j] = jj[current_row[j]+j+1] \/
-			jj[current_row[j]+j+1] * jj[current_row[j]+j+2] = jj[j]
-		),
-
-		$// this is still static... need to work out how to get submatrixes
-		alldifferent([jj[1]]),
-		alldifferent([jj[2], jj[3]]),
-		alldifferent([jj[4], jj[5], jj[6]]),
-		alldifferent([jj[7], jj[8], jj[9], jj[10]])
+	forAll j : int(1..(cells - rows)). (
+		$// Thankfully ESSENSE' is a high-level language so this is human-readable.
+		jj[current_row[j]+j+1] + jj[current_row[j]+j+2] = jj[j]\/ 
+		jj[current_row[j]+j+1] - jj[current_row[j]+j+2] = jj[j] \/ 
+			jj[current_row[j]+j+2] - jj[current_row[j]+j+1] = jj[j] \/
+		jj[current_row[j]+j+1] * jj[j] = jj[current_row[j]+j+2] \/ 
+			jj[current_row[j]+j+2] * jj[j] = jj[current_row[j]+j+1] \/
+		jj[current_row[j]+j+1] * jj[current_row[j]+j+2] = jj[j]
+	),
+	
+	$// Cant cut submatrixes/use more than 1 item in a for loop... this is a workaround.
+	rows > 2 => alldifferent([jj[2], jj[3]]),
+	rows > 2 => alldifferent([jj[4], jj[5], jj[6]]),
+	rows > 3 => alldifferent([jj[7], jj[8], jj[9], jj[10]]),
+	rows > 4 => alldifferent([jj[11], jj[12], jj[13], jj[14], jj[15]]),
+	rows > 5 => alldifferent([jj[16], jj[17], jj[18], jj[19], jj[20], jj[21]]),
+	rows > 6 => alldifferent([jj[22], jj[23], jj[24], jj[25], jj[26], jj[27], jj[28]]),
+	rows > 7 => alldifferent([jj[29], jj[30], jj[31], jj[32], jj[33], jj[34], jj[35], jj[36]]),
+	rows > 8 => alldifferent([jj[37], jj[38], jj[39], jj[40], jj[41], jj[42], jj[43], jj[44], jj[45]])
+	
